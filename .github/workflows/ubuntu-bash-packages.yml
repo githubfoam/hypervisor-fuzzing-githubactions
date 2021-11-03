@@ -1,0 +1,29 @@
+name: "ubuntu bash fuzzing CI workflow"
+
+
+on:
+  push:
+    branches: [ test ]
+
+
+jobs:
+
+  ubuntu-latest-kafl-job:
+    name: "kafl on ubuntu-latest"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status    
+    - name: "deploy kafl"
+      run: sudo make deploy-kafl
+
+  ubuntu-latest-kfx-job:
+    name: "kfx on ubuntu-latest"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status    
+    - name: "deploy kfx"
+      run: sudo make deploy-kfx
